@@ -130,15 +130,14 @@ void setMotorSpeedAndTurnRate(int speed, float turnRate)
     {
         turnRate=-turnRate;
 
-        rightMotor = speed/(turnRate+1.0) - 351*turnRate;
-        leftMotor = speed/(turnRate+1.0) + 351*turnRate;
+        rightMotor  = (int)(speed/(turnRate+1.0)) - (int)(351*turnRate);
+        leftMotor   = (int)(speed/(turnRate+1.0)) + (int)(351*turnRate);
     }
     else //left turn
     {
-        leftMotor = speed/(turnRate+1.0) - 351*turnRate;
-        rightMotor = speed/(turnRate+1.0) + 351*turnRate;
+        rightMotor  = (int)(speed/(turnRate+1.0)) + (int)(351*turnRate);
+        leftMotor   = (int)(speed/(turnRate+1.0)) - (int)(351*turnRate);
     }
-
 
     if(leftMotor<0) //motor is going backward
     {
