@@ -17,7 +17,6 @@
 
 #endif
 
-#include "../header/system.h"        /* System funct/params, like osc/peripheral config */
 #include "../header/user.h"          /* User funct/params, such as InitApp */
 
 /******************************************************************************/
@@ -70,8 +69,6 @@ void main(void)
 {
     int i, j;
     float angle = -3.14;
-    /* Configure the oscillator for the device */
-    ConfigureOscillator();
 
     /* Initialize I/O and Peripherals for application */
     InitApp();
