@@ -18,8 +18,6 @@ extern "C" {
 
 #include <xc.h>
 
-void initPic18Hardware();
-
 /******************************************************************************/
 /* Configuration Bits                                                         */
 /*                                                                            */
@@ -93,6 +91,9 @@ void initPic18Hardware();
 #pragma config EBTRB = OFF      // Boot Block Table Read Protection bit (Boot Block (000000-0007FFh) not protected from table reads executed in other blocks)
 
 
+
+/* initialization function prototype */
+void initPic18Hardware();
 
 #ifdef	__cplusplus
 }
