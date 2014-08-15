@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+#include <stdbool.h>
 /* Motor speed is tenths of a percent from 0 to 1000  */
 
 void inline setMotorState(uint_fast16_t leftMotorSpeed, bool leftMotorForward,
