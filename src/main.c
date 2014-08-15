@@ -17,7 +17,8 @@
 
 #endif
 
-#include "../header/user.h"          /* User funct/params, such as InitApp */
+#include "user.h"          /* User funct/params, such as InitApp */
+#include "motorControl_basic.h"
 
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
@@ -27,25 +28,18 @@
 /* Function Prototypes                                                        */
 /******************************************************************************/
 
-void inline setMotorDutyCycles(int leftMotor, char leftMotorForward,
-        int rightMotor, char rightMotorForward);
-
-//  When the PWM duty cycle, and motor direction have been computed, use
-//  this function to set the appropriate registers
-//  "inline" used to avoid extra function call
-
-void setMotorSpeedAndTurnRate(int speed, float turnRate);
+void setMotorSpeedAndTurnRate(uint_fast16_t speed, float turnRate);
 //  "Primary" control function.
 //  Sets motor state for desired wheel speed, including differential speed
 //  speed: tenths of a percent of duty cycle for PWM; negative it backward
 //  turnRate: rad/sec; positive = CCW, negative = CW
 
 // "User-friendly" motor control functions:
-void moveForward(int speed);
+void moveForward(uint_fast16_t speed);
 //  speed: PWM duty cycle, tenths of percent
 //  equivalent to setMotorSpeedAndTurnRate(speed, 0.0)
 
-void moveBackward(int speed);
+void moveBackward(uint_fast16_t speed);
 //  speed: PWM duty cycle, tenths of percent
 //  equivalent to setMotorSpeedAndTurnRate(-speed, 0.0)
 
@@ -95,30 +89,7 @@ void main(void)
     }
 }
 
-void inline setMotorDutyCycles(int leftMotor, char leftMotorForward,
-    int rightMotor, char rightMotorForward)
-{
-    //Enforce PWM value limits
-    if(leftMotor>0b1111111111) leftMotor = 0b1111111111;
-    if(leftMotor<0) leftMotor = 0;
-
-    if(rightMotor>0b1111111111) rightMotor = 0b1111111111;
-    if(rightMotor<0) rightMotor = 0;
-
-    //Set low PWM bits
-    CCP1CONbits.DC1B = leftMotor % 4;
-    CCP2CONbits.DC2B = rightMotor % 4;
-
-    //Set high PWM bits
-    CCPR1L = leftMotor >> 2;
-    CCPR2L = rightMotor >> 2;
-
-    //Set motor directions
-    LATCbits.LATC0 = leftMotorForward; //Set direction for RC0
-    LATCbits.LATC5 = rightMotorForward; //Set direction for RC5
-}
-
-void setMotorSpeedAndTurnRate(int speed, float turnRate)
+void setMotorSpeedAndTurnRate(uint_fast16_t speed, float turnRate)
 {
     int leftMotor, rightMotor;
     char leftDir, rightDir;
@@ -150,16 +121,16 @@ void setMotorSpeedAndTurnRate(int speed, float turnRate)
     }
     else rightDir = 1;
 
-    setMotorDutyCycles(leftMotor, leftDir, rightMotor, rightDir);
+    setMotorState(leftMotor, leftDir, rightMotor, rightDir);
 }
 
 // "User-friendly" motor control functions:
-void moveForward(int speed)
+void moveForward(uint_fast16_t speed)
 {
     setMotorSpeedAndTurnRate(speed, 0.0);
 }
 
-void moveBackward(int speed)
+void moveBackward(uint_fast16_t speed)
 {
     setMotorSpeedAndTurnRate(-speed, 0.0);
 }
