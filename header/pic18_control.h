@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+#include <xc.h>
 #include <stdint.h>
 #include <stdbool.h>
 

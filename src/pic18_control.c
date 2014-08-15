@@ -12,7 +12,6 @@ void setPWM_RC1(uint_fast16_t newDutyCycle)
 {
   //Enforce PWM 10-bit value limits
   if(newDutyCycle>0b1111111111) newDutyCycle = 0b1111111111;
-  if(newDutyCycle<0) newDutyCycle = 0;
 
   //Set low PWM bits
   CCP1CONbits.DC1B = newDutyCycle % 4;
@@ -33,7 +32,6 @@ void setPWM_RC2(uint_fast16_t newDutyCycle)
 {
   //Enforce PWM 10-bit value limits
   if(newDutyCycle>0b1111111111) newDutyCycle = 0b1111111111;
-  if(newDutyCycle<0) newDutyCycle = 0;
 
   //Set low PWM bits
   CCP2CONbits.DC2B = newDutyCycle % 4;

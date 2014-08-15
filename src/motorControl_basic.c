@@ -6,6 +6,7 @@
  */
 
 #include "motorControl_basic.h"
+#include "pic18_control.h"
 
 void inline setMotorState(uint_fast16_t leftMotorSpeed, bool leftMotorForward,
     uint_fast16_t rightMotorSpeed, bool rightMotorForward)
