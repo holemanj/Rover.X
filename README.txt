@@ -1,8 +1,8 @@
 A personal project to develop code for an autonomous rover built on
-the Dagu Rover 5 chassis (http://www.robotshop.com/en/dagu-rover-5-2wd-tracked-chassis.html).
+the Dagu Rover 5 chassis (http://http://www.dagurobot.com/Robot_Chassis/Rover-5-Chassis).
 
 Motor control is managed via a motor controller board
-(http://www.robotshop.com/en/dagu-4-channel-brushed-dc-motor-controller.html).
+(http://http://www.dagurobot.com/Robot_Controller/Rover5_tank_motor_driver_board).
 
 Currently, I am controlling the system with a Microchip PIC18F45K20, which comes
 on the Microchip PICKit 44-pin Demo Board. The motor speed is controlled by the
